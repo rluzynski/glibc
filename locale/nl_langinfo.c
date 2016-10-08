@@ -21,13 +21,26 @@
 #include <errno.h>
 #include <stddef.h>
 #include "localeinfo.h"
+#include <shlib-compat.h>
 
 
 /* Return a string with the data for locale-dependent parameter ITEM.  */
 
 char *
-nl_langinfo (nl_item item)
+__nl_langinfo (nl_item item)
 {
   return __nl_langinfo_l (item, _NL_CURRENT_LOCALE);
 }
-libc_hidden_def (nl_langinfo)
+versioned_symbol (libc, __nl_langinfo, nl_langinfo, GLIBC_2_27);
+libc_hidden_ver (__nl_langinfo, nl_langinfo)
+
+
+#if SHLIB_COMPAT (libc, GLIBC_2_0, GLIBC_2_27)
+char *
+attribute_compat_text_section
+__nl_langinfo_noaltmon (nl_item item)
+{
+  return __nl_langinfo_noaltmon_l (item, _NL_CURRENT_LOCALE);
+}
+compat_symbol (libc, __nl_langinfo_noaltmon, nl_langinfo, GLIBC_2_0);
+#endif

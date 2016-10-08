@@ -22,12 +22,13 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include "localeinfo.h"
+#include <shlib-compat.h>
 
 
 /* Return a string with the data for locale-dependent parameter ITEM.  */
 
 char *
-__nl_langinfo_l (nl_item item, locale_t l)
+__nl_langinfo_l_internal (nl_item item, locale_t l)
 {
   int category = _NL_ITEM_CATEGORY (item);
   unsigned int index = _NL_ITEM_INDEX (item);
@@ -65,5 +66,47 @@ __nl_langinfo_l (nl_item item, locale_t l)
   /* Return the string for the specified item.  */
   return (char *) data->values[index].string;
 }
-libc_hidden_def (__nl_langinfo_l)
-weak_alias (__nl_langinfo_l, nl_langinfo_l)
+strong_alias (__nl_langinfo_l_internal, __nl_langinfo_l_internal_alias)
+versioned_symbol (libc, __nl_langinfo_l_internal,
+		  __nl_langinfo_l, GLIBC_2_27);
+libc_hidden_ver (__nl_langinfo_l_internal, __nl_langinfo_l)
+versioned_symbol (libc, __nl_langinfo_l_internal_alias,
+		  nl_langinfo_l, GLIBC_2_27);
+libc_hidden_ver (__nl_langinfo_l_internal_alias, nl_langinfo_l)
+
+
+#if SHLIB_COMPAT (libc, GLIBC_2_0, GLIBC_2_27)
+char *
+attribute_compat_text_section
+__nl_langinfo_noaltmon_l (nl_item item, locale_t l)
+{
+  if ((item >= ALTMON_1 && item <= ALTMON_12)
+      || (item >= _NL_WALTMON_1 && item <= _NL_WALTMON_12))
+    /* Pretend it's a bogus index for this category: bogus item.  */
+    return (char *) "";
+  else if (item >= MON_1 && item <= MON_12)
+    {
+      /* ALTMON_... item contains what MON_... item contained before.  */
+      return __nl_langinfo_l (item + ALTMON_1 - MON_1, l);
+    }
+  else if (item >= _NL_WMON_1 && item <= _NL_WMON_12)
+    {
+      /* The same for _NL_WALTMON_... and _NL_WMON_...  */
+      return __nl_langinfo_l (item + _NL_WALTMON_1 - _NL_WMON_1, l);
+    }
+
+  /* Default result if it is not a month.  */
+  return __nl_langinfo_l (item, l);
+}
+libc_hidden_def (__nl_langinfo_noaltmon_l)
+#endif
+
+#if SHLIB_COMPAT (libc, GLIBC_2_2, GLIBC_2_27)
+strong_alias (__nl_langinfo_noaltmon_l, __nl_langinfo_noaltmon_l_alias)
+compat_symbol (libc, __nl_langinfo_noaltmon_l_alias,
+	       __nl_langinfo_l, GLIBC_2_2);
+#endif
+
+#if SHLIB_COMPAT (libc, GLIBC_2_3, GLIBC_2_27)
+compat_symbol (libc, __nl_langinfo_noaltmon_l, nl_langinfo_l, GLIBC_2_3);
+#endif
