@@ -2112,6 +2112,8 @@ GLIBC_2.26 pwritev64v2 F
 GLIBC_2.26 reallocarray F
 GLIBC_2.27 GLIBC_2.27 A
 GLIBC_2.27 __nl_langinfo_l F
+GLIBC_2.27 __strftime_l F
+GLIBC_2.27 __wcsftime_l F
 GLIBC_2.27 copy_file_range F
 GLIBC_2.27 glob F
 GLIBC_2.27 glob64 F
@@ -2127,12 +2129,16 @@ GLIBC_2.27 pkey_set F
 GLIBC_2.27 strfromf32 F
 GLIBC_2.27 strfromf32x F
 GLIBC_2.27 strfromf64 F
+GLIBC_2.27 strftime F
+GLIBC_2.27 strftime_l F
 GLIBC_2.27 strtof32 F
 GLIBC_2.27 strtof32_l F
 GLIBC_2.27 strtof32x F
 GLIBC_2.27 strtof32x_l F
 GLIBC_2.27 strtof64 F
 GLIBC_2.27 strtof64_l F
+GLIBC_2.27 wcsftime F
+GLIBC_2.27 wcsftime_l F
 GLIBC_2.27 wcstof32 F
 GLIBC_2.27 wcstof32_l F
 GLIBC_2.27 wcstof32x F
