@@ -25,6 +25,15 @@ libc_hidden_proto (__wcstof_l)
 libc_hidden_proto (__wcstold_l)
 libc_hidden_proto (__wcsftime_l)
 
+/* Backward compatibility function: feature_OB argument specifies
+   whether or not %OB format specifier should be implemented.  */
+extern size_t __wcsftime_l_common (wchar_t *__restrict __s, size_t __maxsize,
+				   const wchar_t *__restrict __format,
+				   const struct tm *__restrict __tp,
+				   const int feature_OB,
+				   locale_t __loc) __THROW;
+libc_hidden_proto (__wcsftime_l_common)
+
 
 extern double __wcstod_internal (const wchar_t *__restrict __nptr,
 				 wchar_t **__restrict __endptr, int __group)

@@ -22,4 +22,28 @@
 #define COMPILE_WIDE	1
 #include "strftime_l.c"
 
-weak_alias (__wcsftime_l, wcsftime_l)
+size_t
+__wcsftime_l_internal (wchar_t *s, size_t maxsize, const wchar_t *format,
+		       const struct tm *tp, locale_t loc)
+{
+  return my_strftime (s, maxsize, format, tp, 1, loc);
+}
+strong_alias (__wcsftime_l_internal, __wcsftime_l_internal_alias)
+versioned_symbol (libc, __wcsftime_l_internal_alias,
+		  __wcsftime_l, GLIBC_2_27);
+libc_hidden_ver (__wcsftime_l_internal_alias, __wcsftime_l)
+versioned_symbol (libc, __wcsftime_l_internal, wcsftime_l, GLIBC_2_27);
+libc_hidden_ver (__wcsftime_l_internal, wcsftime_l)
+
+#if SHLIB_COMPAT (libc, GLIBC_2_3, GLIBC_2_27)
+size_t
+attribute_compat_text_section
+__wcsftime_l_compat (wchar_t *s, size_t maxsize, const wchar_t *format,
+		     const struct tm *tp, locale_t loc)
+{
+  return my_strftime (s, maxsize, format, tp, 0, loc);
+}
+strong_alias (__wcsftime_l_compat, __wcsftime_l_compat_alias)
+compat_symbol (libc, __wcsftime_l_compat_alias, __wcsftime_l, GLIBC_2_3);
+compat_symbol (libc, __wcsftime_l_compat, wcsftime_l, GLIBC_2_3);
+#endif

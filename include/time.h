@@ -8,6 +8,15 @@ extern __typeof (strftime_l) __strftime_l;
 libc_hidden_proto (__strftime_l)
 extern __typeof (strptime_l) __strptime_l;
 
+/* Backward compatibility function: feature_OB argument specifies
+   whether or not %OB format specifier should be implemented.  */
+extern size_t __strftime_l_common (char *__restrict __s, size_t __maxsize,
+				   const char *__restrict __format,
+				   const struct tm *__restrict __tp,
+				   const int feature_OB,
+				   locale_t __loc) __THROW;
+libc_hidden_proto (__strftime_l_common)
+
 libc_hidden_proto (time)
 libc_hidden_proto (asctime)
 libc_hidden_proto (mktime)

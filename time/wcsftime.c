@@ -17,12 +17,26 @@
 
 #include <wchar.h>
 #include <locale/localeinfo.h>
+#include <shlib-compat.h>
 
 
 size_t
-wcsftime (wchar_t *s, size_t maxsize, const wchar_t *format,
-	  const struct tm *tp)
+__wcsftime (wchar_t *s, size_t maxsize, const wchar_t *format,
+	    const struct tm *tp)
 {
-  return __wcsftime_l (s, maxsize, format, tp, _NL_CURRENT_LOCALE);
+  return __wcsftime_l_common (s, maxsize, format, tp, 1, _NL_CURRENT_LOCALE);
 }
-libc_hidden_def (wcsftime)
+versioned_symbol (libc, __wcsftime, wcsftime, GLIBC_2_27);
+libc_hidden_ver (__wcsftime, wcsftime)
+
+
+#if SHLIB_COMPAT (libc, GLIBC_2_2, GLIBC_2_27)
+size_t
+attribute_compat_text_section
+__wcsftime_compat (wchar_t *s, size_t maxsize, const wchar_t *format,
+		   const struct tm *tp)
+{
+  return __wcsftime_l_common (s, maxsize, format, tp, 0, _NL_CURRENT_LOCALE);
+}
+compat_symbol (libc, __wcsftime_compat, wcsftime, GLIBC_2_2);
+#endif

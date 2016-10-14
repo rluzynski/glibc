@@ -56,6 +56,8 @@
 extern char *tzname[];
 #endif
 
+#include <shlib-compat.h>
+
 /* Do multibyte processing if multibytes are supported, unless
    multibyte sequences are safe in formats.  Multibyte sequences are
    safe if they cannot contain byte sequences that look like format
@@ -280,15 +282,19 @@ static const CHAR_T zeroes[16] = /* "0000000000000000" */
    function gets as an additional argument the locale which has to be
    used.  To access the values we have to redefine the _NL_CURRENT
    macro.  */
-# define strftime		__strftime_l
-# define wcsftime		__wcsftime_l
+# define strftime		__strftime_l_common
+# define wcsftime		__wcsftime_l_common
 # undef _NL_CURRENT
 # define _NL_CURRENT(category, item) \
   (current->values[_NL_ITEM_INDEX (item)].string)
+# define FEATURE_OB_PARAM , int feature_OB
+# define FEATURE_OB_ARG , feature_OB
 # define LOCALE_PARAM , locale_t loc
 # define LOCALE_ARG , loc
 # define HELPER_LOCALE_ARG  , current
 #else
+# define FEATURE_OB_PARAM
+# define FEATURE_OB_ARG
 # define LOCALE_PARAM
 # define LOCALE_ARG
 # ifdef _LIBC
@@ -436,6 +442,7 @@ static CHAR_T const month_name[][10] =
 static size_t __strftime_internal (CHAR_T *, size_t, const CHAR_T *,
 				   const struct tm *, bool *
 				   ut_argument_spec
+				   FEATURE_OB_PARAM
 				   LOCALE_PARAM) __THROW;
 
 /* Write information from TP into S according to the format
@@ -447,7 +454,7 @@ static size_t __strftime_internal (CHAR_T *, size_t, const CHAR_T *,
 
 size_t
 my_strftime (CHAR_T *s, size_t maxsize, const CHAR_T *format,
-	     const struct tm *tp ut_argument_spec LOCALE_PARAM)
+	     const struct tm *tp ut_argument_spec FEATURE_OB_PARAM LOCALE_PARAM)
 {
 #if !defined _LIBC && HAVE_TZNAME && HAVE_TZSET
   /* Solaris 2.5 tzset sometimes modifies the storage returned by localtime.
@@ -458,7 +465,7 @@ my_strftime (CHAR_T *s, size_t maxsize, const CHAR_T *format,
 #endif
   bool tzset_called = false;
   return __strftime_internal (s, maxsize, format, tp, &tzset_called
-			      ut_argument LOCALE_ARG);
+			      ut_argument FEATURE_OB_ARG LOCALE_ARG);
 }
 #ifdef _LIBC
 libc_hidden_def (my_strftime)
@@ -467,10 +474,12 @@ libc_hidden_def (my_strftime)
 static size_t
 __strftime_internal (CHAR_T *s, size_t maxsize, const CHAR_T *format,
 		     const struct tm *tp, bool *tzset_called
-		     ut_argument_spec LOCALE_PARAM)
+		     ut_argument_spec FEATURE_OB_PARAM LOCALE_PARAM)
 {
 #if defined _LIBC && defined USE_IN_EXTENDED_LOCALE_MODEL
   struct __locale_data *const current = loc->__locales[LC_TIME];
+#else
+# define feature_OB 1
 #endif
 
   int hour12 = tp->tm_hour;
@@ -801,13 +810,15 @@ __strftime_internal (CHAR_T *s, size_t maxsize, const CHAR_T *format,
 	case L_('B'):
 	  if (modifier == L_('E'))
 	    goto bad_format;
+	  if (!feature_OB && modifier == L_('O'))
+	    goto bad_format;
 	  if (change_case)
 	    {
 	      to_uppcase = 1;
 	      to_lowcase = 0;
 	    }
 #if defined _NL_CURRENT || !HAVE_STRFTIME
-	  if (modifier == L_('O'))
+	  if (!feature_OB || modifier == L_('O'))
 	    cpy (STRLEN (f_altmonth), f_altmonth);
 	  else
 	    cpy (STRLEN (f_month), f_month);
@@ -839,10 +850,10 @@ __strftime_internal (CHAR_T *s, size_t maxsize, const CHAR_T *format,
 	    CHAR_T *old_start = p;
 	    size_t len = __strftime_internal (NULL, (size_t) -1, subfmt,
 					      tp, tzset_called ut_argument
-					      LOCALE_ARG);
+					      FEATURE_OB_ARG LOCALE_ARG);
 	    add (len, __strftime_internal (p, maxsize - i, subfmt,
 					   tp, tzset_called ut_argument
-					   LOCALE_ARG));
+					   FEATURE_OB_ARG LOCALE_ARG));
 
 	    if (to_uppcase)
 	      while (old_start < p)
@@ -1443,10 +1454,35 @@ size_t
 emacs_strftime (char *s, size_t maxsize, const char *format,
 		const struct tm *tp)
 {
-  return my_strftime (s, maxsize, format, tp, 0);
+  return my_strftime (s, maxsize, format, tp, 1, 0);
 }
 #endif
 
 #if defined _LIBC && !defined COMPILE_WIDE
-weak_alias (__strftime_l, strftime_l)
+size_t
+__strftime_l_internal (char *s, size_t maxsize, const char *format,
+		       const struct tm *tp, locale_t loc)
+{
+  return my_strftime (s, maxsize, format, tp, 1, loc);
+}
+strong_alias (__strftime_l_internal, __strftime_l_internal_alias)
+versioned_symbol (libc, __strftime_l_internal_alias,
+		  __strftime_l, GLIBC_2_27);
+libc_hidden_ver (__strftime_l_internal_alias, __strftime_l)
+versioned_symbol (libc, __strftime_l_internal, strftime_l, GLIBC_2_27);
+libc_hidden_ver (__strftime_l_internal, strftime_l)
+
+# if SHLIB_COMPAT (libc, GLIBC_2_3, GLIBC_2_27)
+size_t
+attribute_compat_text_section
+__strftime_l_compat (char *s, size_t maxsize, const char *format,
+		     const struct tm *tp, locale_t loc)
+{
+  return my_strftime (s, maxsize, format, tp, 0, loc);
+}
+strong_alias (__strftime_l_compat, __strftime_l_compat_alias)
+compat_symbol (libc, __strftime_l_compat_alias, __strftime_l, GLIBC_2_3);
+compat_symbol (libc, __strftime_l_compat, strftime_l, GLIBC_2_3);
+# endif
+
 #endif

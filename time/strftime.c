@@ -17,11 +17,25 @@
 
 #include <time.h>
 #include <locale/localeinfo.h>
+#include <shlib-compat.h>
 
 
 size_t
-strftime (char *s, size_t maxsize, const char *format, const struct tm *tp)
+__strftime (char *s, size_t maxsize, const char *format, const struct tm *tp)
 {
-  return __strftime_l (s, maxsize, format, tp, _NL_CURRENT_LOCALE);
+  return __strftime_l_common (s, maxsize, format, tp, 1, _NL_CURRENT_LOCALE);
 }
-libc_hidden_def (strftime)
+versioned_symbol (libc, __strftime, strftime, GLIBC_2_27);
+libc_hidden_ver (__strftime, strftime)
+
+
+#if SHLIB_COMPAT (libc, GLIBC_2_0, GLIBC_2_27)
+size_t
+attribute_compat_text_section
+__strftime_compat (char *s, size_t maxsize, const char *format,
+		   const struct tm *tp)
+{
+  return __strftime_l_common (s, maxsize, format, tp, 0, _NL_CURRENT_LOCALE);
+}
+compat_symbol (libc, __strftime_compat, strftime, GLIBC_2_0);
+#endif
