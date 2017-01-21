@@ -81,7 +81,9 @@ attribute_compat_text_section
 __nl_langinfo_noaltmon_l (nl_item item, locale_t l)
 {
   if ((item >= ALTMON_1 && item <= ALTMON_12)
-      || (item >= _NL_WALTMON_1 && item <= _NL_WALTMON_12))
+      || (item >= _NL_WALTMON_1 && item <= _NL_WALTMON_12)
+      || (item >= _NL_ABALTMON_1 && item <= _NL_ABALTMON_12)
+      || (item >= _NL_WABALTMON_1 && item <= _NL_WABALTMON_12))
     /* Pretend it's a bogus index for this category: bogus item.  */
     return (char *) "";
   else if (item >= MON_1 && item <= MON_12)
@@ -93,6 +95,16 @@ __nl_langinfo_noaltmon_l (nl_item item, locale_t l)
     {
       /* The same for _NL_WALTMON_... and _NL_WMON_...  */
       return __nl_langinfo_l (item + _NL_WALTMON_1 - _NL_WMON_1, l);
+    }
+  else if (item >= ABMON_1 && item <= ABMON_12)
+    {
+      /* _NL_ABALTMON... item contains what ABMON_... item contained before.  */
+      return __nl_langinfo_l (item + _NL_ABALTMON_1 - ABMON_1, l);
+    }
+  else if (item >= _NL_WABMON_1 && item <= _NL_WABMON_12)
+    {
+      /* The same for _NL_WABALTMON_... and _NL_WABMON_...  */
+      return __nl_langinfo_l (item + _NL_WABALTMON_1 - _NL_WABMON_1, l);
     }
 
   /* Default result if it is not a month.  */

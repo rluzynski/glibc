@@ -797,8 +797,10 @@ __strftime_internal (CHAR_T *s, size_t maxsize, const CHAR_T *format,
 	    }
 	  if (modifier == L_('E'))
 	    goto bad_format;
+	  if (!feature_OB && modifier == L_('O'))
+	    goto bad_format;
 #if defined _NL_CURRENT || !HAVE_STRFTIME
-	  if (modifier == L_('O'))
+	  if (!feature_OB || modifier == L_('O'))
 	    cpy (aam_len, a_altmonth);
 	  else
 	    cpy (am_len, a_month);
