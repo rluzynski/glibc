@@ -110,6 +110,18 @@ abmon   "gen";"feb";/
 	"lug";"ago";/
 	"set";"ott";/
 	"nov";"dic"
+alt_mon "Gennaio";/
+	"Febbraio";/
+	"Marzo";/
+	"Aprile";/
+	"Maggio";/
+	"Giugno";/
+	"Luglio";/
+	"Agosto";/
+	"Settembre";/
+	"Ottobre";/
+	"Novembre";/
+	"Dicembre"
 mon     "gennaio";/
 	"febbraio";/
 	"marzo";/

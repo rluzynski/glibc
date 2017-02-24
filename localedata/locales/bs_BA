@@ -111,7 +111,7 @@ abmon   "Jan";"Feb";/
         "Jul";"Aug";/
         "Sep";"Okt";/
         "Nov";"Dec"
-mon     "Januar";/
+alt_mon "Januar";/
         "Februar";/
         "Mart";/
         "April";/
@@ -123,6 +123,18 @@ mon     "Januar";/
         "Oktobar";/
         "Novembar";/
         "Decembar"
+mon     "januar";/
+        "februar";/
+        "mart";/
+        "april";/
+        "maj";/
+        "juni";/
+        "juli";/
+        "august";/
+        "septembar";/
+        "oktobar";/
+        "novembar";/
+        "decembar"
 d_t_fmt "%a %d %b %Y %T"
 d_fmt   "%d.%m.%Y"
 t_fmt   "%T"

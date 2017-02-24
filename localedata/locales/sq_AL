@@ -256,6 +256,20 @@ abmon       "Jan";"Shk";/
 	    "Sht";"Tet";/
 	    "N<U00EB>n";"Dhj"
 %
+% Full month names (%OB)
+alt_mon     "Janar";/
+	    "Shkurt";/
+	    "Mars";/
+	    "Prill";/
+	    "Maj";/
+	    "Qershor";/
+	    "Korrik";/
+	    "Gusht";/
+	    "Shtator";/
+	    "Tetor";/
+	    "N<U00EB>ntor";/
+	    "Dhjetor"
+%
 % Full month names (%B)
 mon         "janar";/
 	    "shkurt";/

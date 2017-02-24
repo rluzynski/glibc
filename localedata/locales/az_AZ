@@ -254,6 +254,18 @@ abday   "baz";/
         "cax";/
         "c<U00FC>m";/
         "<U015F>nb"
+alt_mon "Yanvar";/
+        "Fevral";/
+        "Mart";/
+        "Aprel";/
+        "May";/
+        "<U0130>yun";/
+        "<U0130>yul";/
+        "Avqust";/
+        "Sentyabr";/
+        "Oktyabr";/
+        "Noyabr";/
+        "Dekabr"
 mon     "yanvar";/
         "fevral";/
         "mart";/

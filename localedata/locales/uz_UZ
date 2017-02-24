@@ -249,7 +249,7 @@ abmon       "Yan";"Fev";/
             "Iyl";"Avg";/
             "Sen";"Okt";/
             "Noy";"Dek"
-mon         "Yanvar";/
+alt_mon     "Yanvar";/
             "Fevral";/
             "Mart";/
             "Aprel";/
@@ -261,6 +261,18 @@ mon         "Yanvar";/
             "Oktabr";/
             "Noyabr";/
             "Dekabr"
+mon         "yanvar";/
+            "fevral";/
+            "mart";/
+            "aprel";/
+            "may";/
+            "iyun";/
+            "iyul";/
+            "avgust";/
+            "sentabr";/
+            "oktabr";/
+            "noyabr";/
+            "dekabr"
 d_t_fmt  "%T, %d %B, %Y yil, %A"
 d_fmt       "%d//%m//%y"
 t_fmt       "%T"
