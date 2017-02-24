@@ -298,7 +298,7 @@ abday   "Du<U015F>";"Si<U015F>";/
 % November  => Noýabr
 % December  => Dekabr
 
-mon     "<U00DD>anwar";/
+alt_mon "<U00DD>anwar";/
         "Fewral";/
         "Mart";/
         "Aprel";/
@@ -310,6 +310,19 @@ mon     "<U00DD>anwar";/
         "Okt<U00FD>abr";/
         "No<U00FD>abr";/
         "Dekabr"
+
+mon     "<U00FD>anwar";/
+        "fewral";/
+        "mart";/
+        "aprel";/
+        "ma<U00FD>";/
+        "i<U00FD>un";/
+        "i<U00FD>ul";/
+        "awgust";/
+        "sent<U00FD>abr";/
+        "okt<U00FD>abr";/
+        "no<U00FD>abr";/
+        "dekabr"
 
 abmon   "<U00DD>an";"Few";/
         "Mar";"Apr";/

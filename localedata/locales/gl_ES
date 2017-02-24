@@ -107,7 +107,7 @@ abmon   "Xan";"Feb";/
         "Xul";"Ago";/
         "Set";"Out";/
         "Nov";"Dec"
-mon     "Xaneiro";/
+alt_mon "Xaneiro";/
         "Febreiro";/
         "Marzo";/
         "Abril";/
@@ -119,6 +119,18 @@ mon     "Xaneiro";/
         "Outubro";/
         "Novembro";/
         "Decembro"
+mon     "xaneiro";/
+        "febreiro";/
+        "marzo";/
+        "abril";/
+        "maio";/
+        "xu<U00F1>o";/
+        "xullo";/
+        "agosto";/
+        "setembro";/
+        "outubro";/
+        "novembro";/
+        "decembro"
 d_t_fmt "%a %d %b %Y %T %Z"
 d_fmt   "%d//%m//%y"
 t_fmt   "%T"
