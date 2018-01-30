@@ -120,7 +120,7 @@ abmon   "gen";"feb";/
         "jul";"ago";/
         "set";"oct";/
         "nov";"des"
-mon     "gener";/
+alt_mon "gener";/
         "febrer";/
         "mar<U00E7>";/
         "abril";/
@@ -132,6 +132,18 @@ mon     "gener";/
         "octubre";/
         "novembre";/
         "desembre"
+mon     "de gener";/
+        "de febrer";/
+        "de mar<U00E7>";/
+        "d<U2019>abril";/
+        "de maig";/
+        "de juny";/
+        "de juliol";/
+        "d<U2019>agost";/
+        "de setembre";/
+        "d<U2019>octubre";/
+        "de novembre";/
+        "de desembre"
 d_t_fmt "%a %d %b %Y %T %Z"
 d_fmt   "%d//%m//%y"
 t_fmt   "%T"

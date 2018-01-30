@@ -138,7 +138,7 @@ day		"Nede<U013E>a";/
 		"Piatok";/
 		"Sobota"
 
-mon		"janu<U00E1>r";/
+alt_mon		"janu<U00E1>r";/
 		"febru<U00E1>r";/
 		"marec";/
 		"apr<U00ED>l";/
@@ -150,6 +150,19 @@ mon		"janu<U00E1>r";/
 		"okt<U00F3>ber";/
 		"november";/
 		"december"
+
+mon		"janu<U00E1>ra";/
+		"febru<U00E1>ra";/
+		"marca";/
+		"apr<U00ED>la";/
+		"m<U00E1>ja";/
+		"j<U00FA>na";/
+		"j<U00FA>la";/
+		"augusta";/
+		"septembra";/
+		"okt<U00F3>bra";/
+		"novembra";/
+		"decembra"
 
 % Hm - máme zaužívané skratky pre mesiace ?
 

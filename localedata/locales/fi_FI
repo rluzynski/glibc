@@ -184,7 +184,7 @@ abmon    "tammi";/
          "loka";/
          "marras";/
          "joulu"
-mon      "tammikuu";/
+alt_mon  "tammikuu";/
          "helmikuu";/
          "maaliskuu";/
          "huhtikuu";/
@@ -196,7 +196,19 @@ mon      "tammikuu";/
          "lokakuu";/
          "marraskuu";/
          "joulukuu"
-d_t_fmt  "%a %e. %Bta %Y %H.%M.%S"
+mon      "tammikuuta";/
+         "helmikuuta";/
+         "maaliskuuta";/
+         "huhtikuuta";/
+         "toukokuuta";/
+         "kes<U00E4>kuuta";/
+         "hein<U00E4>kuuta";/
+         "elokuuta";/
+         "syyskuuta";/
+         "lokakuuta";/
+         "marraskuuta";/
+         "joulukuuta"
+d_t_fmt  "%a %e. %B %Y %H.%M.%S"
 d_fmt    "%d.%m.%Y"
 t_fmt    "%H.%M.%S"
 am_pm    "";""

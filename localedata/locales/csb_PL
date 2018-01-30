@@ -164,7 +164,7 @@ abmon  "st<U00EB>"; "gro";/
         "l<U00EB>p"; "z<U00E9>l";/
         "s<U00E9>w"; "ruj";/
         "l<U00EB>s"; "g<U00F2>d"
-mon    "st<U00EB>cznik";/
+alt_mon "st<U00EB>cznik";/
         "gromicznik";/
         "str<U00EB>miannik";/
         "<U0142><U017C><U00EB>kwi<U00F4>t";/
@@ -176,6 +176,18 @@ mon    "st<U00EB>cznik";/
         "rujan";/
         "l<U00EB>stopadnik";/
         "g<U00F2>dnik"
+mon     "st<U00EB>cznika";/
+        "gromicznika";/
+        "str<U00EB>miannika";/
+        "<U0142><U017C><U00EB>kwi<U00F4>ta";/
+        "m<U00F4>ja";/
+        "czerwi<U0144>ca";/
+        "l<U00EB>pinca";/
+        "z<U00E9>lnika";/
+        "s<U00E9>wnika";/
+        "rujana";/
+        "l<U00EB>stopadnika";/
+        "g<U00F2>dnika"
 d_t_fmt "%a %d %b %Y %T %Z"
 d_fmt   "%Y-%m-%d"
 t_fmt   "%T"
