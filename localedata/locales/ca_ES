@@ -106,7 +106,7 @@ grouping             0;0
 END LC_NUMERIC
 
 LC_TIME
-abday   "dg";"dl";"dt";"dc";"dj";"dv";"ds"
+abday   "dg.";"dl.";"dt.";"dc.";"dj.";"dv.";"ds."
 day     "diumenge";/
         "dilluns";/
         "dimarts";/
