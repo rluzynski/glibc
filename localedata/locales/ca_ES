@@ -114,12 +114,18 @@ day     "diumenge";/
         "dijous";/
         "divendres";/
         "dissabte"
-abmon   "gen";"feb";/
-        "mar";"abr";/
-        "mai";"jun";/
-        "jul";"ago";/
-        "set";"oct";/
-        "nov";"des"
+alt_abmon "gen.";"febr.";/
+          "mar<U00E7>";"abr.";/
+          "maig";"juny";/
+          "jul.";"ag.";/
+          "set.";"oct.";/
+          "nov.";"des."
+abmon   "de gen.";"de febr.";/
+        "de mar<U00E7>";"d<U2019>abr.";/
+        "de maig";"de juny";/
+        "de jul.";"d<U2019>ag.";/
+        "de set.";"d<U2019>oct.";/
+        "de nov.";"de des."
 alt_mon "gener";/
         "febrer";/
         "mar<U00E7>";/
@@ -144,7 +150,7 @@ mon     "de gener";/
         "d<U2019>octubre";/
         "de novembre";/
         "de desembre"
-d_t_fmt "%a %d %b %Y %T %Z"
+d_t_fmt "%A, %e %B de %Y, %T %Z"
 d_fmt   "%d//%m//%y"
 t_fmt   "%T"
 am_pm   "";""
